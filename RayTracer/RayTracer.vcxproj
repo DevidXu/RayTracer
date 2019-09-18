@@ -115,6 +115,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Constants.h" />
+    <ClInclude Include="KDTree.h" />
+    <ClInclude Include="Logger.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="Raster.h" />
+    <ClInclude Include="Ray.h" />
+    <ClInclude Include="Patch.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="Vector.h" />
+    <ClInclude Include="Helper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Helper.cpp" />
+    <ClCompile Include="KDTree.cpp" />
+    <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Raster.cpp" />
+    <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="RayTracer.cpp" />
+    <ClCompile Include="Patch.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
