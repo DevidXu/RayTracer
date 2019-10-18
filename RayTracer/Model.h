@@ -13,26 +13,29 @@ typedef vector<shared_ptr<Patch>> PatchArr;
 class Shape {
 protected:
 	PatchArr patches;
-	vector<Vertex> vertexes;
 	vector<Vector3> positions, normals;
 	vector<Vector2> texcoords;
+	shared_ptr<Model> model;
 public:
 	shared_ptr<PatchArr> getPatches();
+	shared_ptr<Model> getModel();
+	void setModel(shared_ptr<Model> mModel);
 };
 
 
 class OBJShape : public Shape {
-private:
-	void generateVertexes(vector<Vector3>& positions, vector<Vector3>& normals, vector<Vector2>& texcoords);
 public:
-	void loadOBJShape(std::string filename);
+	OBJShape(string filename);
 };
 
 
 class CubeShape : public Shape {
 private:	// should use same structure as OBJ model
+	Vector3 color;
 public:
-	void loadCubeShape(vector<Vector3>& position, Vector3 color);
+	CubeShape(vector<Vector3>& position, Vector3 color);
+	CubeShape(Vector3 small, Vector3 large, Vector3 mColor);
+	void generatePatches();
 };
 
 
@@ -40,16 +43,33 @@ class SphereShape : public Shape {
 private:
 	Vector3 center, color;
 public:
-	void loadSphereShape(Vector3& mCenter, Vector3& mColor);
+	SphereShape(Vector3 mCenter, Vector3 mColor, float mRadius);
 };
 
 
 class Model {
-private:
+protected:
 	shared_ptr<Shape> shape;
-	Material material;
+	shared_ptr<Material> material;
+	string name;
 public:
-	void setShape(shared_ptr<Shape> mShape);
-	shared_ptr<vector<Patch>> getPatches();
+	Model(shared_ptr<Shape> mShape, shared_ptr<Material> mMaterial, string mName);
+	
+	shared_ptr<Material> getMaterial();
+	shared_ptr<Shape> getShape();
+	shared_ptr<PatchArr> getPatches();
+	string getName();
+
+	bool isLightSource();
+};
+
+class Light : public Model {
+private:
+	Vector3 center;
+	float lightArea;
+public:
+	Light(shared_ptr<Shape> mShape, shared_ptr<Material> mMaterial, string mName);
+	float getLightPDF(Vector3 point);
+	Vector3 getCenter();
 };
 #endif

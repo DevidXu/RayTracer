@@ -2,10 +2,10 @@
 #ifndef _LOGGER_H__
 #define _LOGGER_H__
 
-#include "Helper.h"
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Helper.h"
 
 using namespace std;
 
@@ -25,6 +25,12 @@ private:
 	bool toFile = false;
 	ofstream file;
 	LOGGER_LEVEL level;
+	
+	string getFormattedTime();
 };
+
+#define INFO(A) Logger::Instance()->info(A)
+#define WARN(A) Logger::Instance()->warn(A)
+#define ERROR(A) Logger::Instance()->error(A)
 
 #endif
