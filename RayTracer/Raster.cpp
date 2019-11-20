@@ -154,7 +154,11 @@ void Raster::render() {
 			picture[y - yStart][x - xStart] = color;
 		}
 		float progress = (y - yStart) * 1.0f / (yEnd - yStart);
-		INFO("Line " + to_string(y) + " has been rendered; progress: " + to_string(progress));
+		string pg = "Line " + to_string(y) + " has been rendered;";
+#if OMP_ACCR == 1
+		pg += " progress: " + to_string(progress);
+#endif
+		INFO(pg);
 	}
 
 	float end = float(clock() - begin) / CLOCKS_PER_SEC;
