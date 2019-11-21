@@ -138,6 +138,7 @@ void Raster::render() {
 	return;
 #endif
 	for (int y = yStart; y < yEnd; y++) {
+		if (y >= Raster::Instance()->height) continue;
 #if OMP_ACCR == 1
 #pragma omp parallel for
 #endif
@@ -251,38 +252,38 @@ Vector3 Raster::traceRay(shared_ptr<Ray> ray, const shared_ptr<KDTree>& kdTree, 
 }
 
 
-void Raster::normalize() {
-	assert__(picture.size() > 0) {
+void Raster::normalize(Picture &graph) {
+	assert__(graph.size() > 0) {
 		ERROR("Cannot write empty image to file");
 	}
-	const int rows = picture.size(), cols = picture[0].size();
+	const int rows = graph.size(), cols = graph[0].size();
 
 	Vector3 max(1.0f, 1.0f, 1.0f);
 
 	for (int i=0; i<rows; i++)
 		for (int j = 0; j < cols; j++) {
 			for (int k = 0; k < 3; k++)
-				if (picture[i][j].value[k] > max.value[k])
-					max.value[k] = picture[i][j].value[k];
+				if (graph[i][j].value[k] > max.value[k])
+					max.value[k] = graph[i][j].value[k];
 		}
 	for (int i = 0; i<rows; i++)
 		for (int j = 0; j < cols; j++) {
 			for (int k = 0; k < 3; k++) {
-				float origin = picture[i][j].value[k];
+				float origin = graph[i][j].value[k];
 				origin /= max.value[k];
-				picture[i][j].value[k] = pow(origin, 0.4f);
+				graph[i][j].value[k] = pow(origin, 0.4f);
 			}
 		}
 }
 
 
-void Raster::writeToPPM(string fileName) {
-	assert__(picture.size() > 0) {
+void Raster::writeToPPM(string fileName, Picture &graph) {
+	assert__(graph.size() > 0) {
 		ERROR("Cannot write empty image to file");
 	}
 
-	normalize();
-	const int rows = picture.size(), cols = picture[0].size();
+	normalize(graph);
+	const int rows = graph.size(), cols = graph[0].size();
 	
 	FILE *fp = NULL;
 	fopen_s(&fp, (fileName + ".ppm").c_str(), "wb"); /* b - binary mode */
@@ -293,7 +294,7 @@ void Raster::writeToPPM(string fileName) {
 		for (int j = 0; j < cols; ++j) {
 			static unsigned char color[3];
 			for (int k = 0; k < 3; k++)
-				color[k] = (int)(picture[i][j].value[k] * 255) % 256;
+				color[k] = (int)(graph[i][j].value[k] * 255) % 256;
 			fwrite(color, 1, 3, fp);
 		}
 	}

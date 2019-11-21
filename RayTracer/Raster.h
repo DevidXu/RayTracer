@@ -41,8 +41,8 @@ public:
 	shared_ptr<LightArr> getLights();
 	shared_ptr<KDTree> getKDTree();
 
-	void normalize();
-	void writeToPPM(string fileName);
+	void normalize(Picture &graph);
+	void writeToPPM(string fileName, Picture &graph);
 };
 
 #endif

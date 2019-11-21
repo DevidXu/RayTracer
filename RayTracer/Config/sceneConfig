@@ -1,11 +1,11 @@
-Height 100
-Width 100
+Height 50
+Width 50
 xStart 0
-xEnd 100
+xEnd 50
 yStart 0
-yEnd 100
+yEnd 50
 CameraPosition 4.5 0.0 0.0
 CameraDirection -1.0 -0.0 0.0
 angleHeight 90
 angleWidth 90
-SampleNum 10
+SampleNum 20

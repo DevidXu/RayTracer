@@ -258,8 +258,3 @@ void constructKDTree() {
 	INFO("KD Tree has been constructed completely");
 }
 
-
-void renderScene() {
-	Raster::Instance()->render();
-	Raster::Instance()->writeToPPM("result");
-}

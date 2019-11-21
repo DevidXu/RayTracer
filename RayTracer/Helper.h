@@ -21,8 +21,6 @@ void loadConfigInfo(std::string sceneConfig, std::string modelConfig);
 
 void constructKDTree();
 
-void renderScene();
-
 string trim(string s);
 
 #endif
