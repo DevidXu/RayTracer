@@ -1,4 +1,5 @@
 #include "KDTree.h"
+#include "Constants.h"
 #include <algorithm>
 #include <numeric>
 

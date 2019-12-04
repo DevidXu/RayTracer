@@ -1,5 +1,6 @@
 #include "Logger.h"
 #include <ctime>
+#include <chrono>
 #include <fstream>
 
 Logger::Logger() {
@@ -16,10 +17,13 @@ Logger::~Logger() {
 	if (toFile) file.close();
 }
 
+const std::string currentDateTime() {
+	time_t     now = time(0);
+	return to_string(now);
+}
+
 string Logger::getFormattedTime() {
-	time_t now = time(0);
-	char dt[26]; ctime_s(dt, sizeof dt, &now);
-	string ts(dt); ts = trim(ts);
+	string ts = currentDateTime(); ts = trim(ts);
 	return ts.substr(0, ts.size() - 5) + "  ";
 }
 
@@ -32,9 +36,6 @@ void Logger::info(string msg) {
 
 void Logger::warn(string msg) {
 	if (level == NONE || level == INFO) return;
-	time_t now = time(0);
-	char dt[26]; ctime_s(dt, sizeof dt, &now);
-	string ts(dt); ts = trim(ts);
 	string message = "WARN: " + getFormattedTime() + msg + '\n';
 	if (toFile) file << message;
 	else cout << message;
@@ -42,9 +43,6 @@ void Logger::warn(string msg) {
 
 void Logger::error(string msg) {
 	if (level != ERROR) return;
-	time_t now = time(0);
-	char dt[26]; ctime_s(dt, sizeof dt, &now);
-	string ts(dt); ts = trim(ts);
 	string message = "ERROR: " + getFormattedTime() + msg + '\n';
 	if (toFile) file << message;
 	else cout << message;

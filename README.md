@@ -10,3 +10,11 @@ Photo-realistic images are of great charm and importance to daily life. It has m
 2. Render models with materials and thousands of faces
 3. Reach significant speed-up over sequential computation
 4. Explore possibility of using GPU to speed up rendering
+# Environment
+Windows 10, Intel(R) Core(TM) i7-7700HQ CPU @2.80GHz
+RAM: 16.0 GB
+Installed: Visual Studio, Microsoft MPI
+# Run Program
+I suggest downloading the whole project and open the sln file in Visual Studio 2017. 
+Make sure you have installed Microsoft MPI and the directory of mpiexec.exe is listed in System Path.
+On windows platform: mpiexec.exe -n 8 RayTracer.exe (feel free to choose number of processes)

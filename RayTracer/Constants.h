@@ -8,6 +8,7 @@
 #include "Helper.h"
 #include "Model.h"
 #include <memory>
+#include <math.h>
 using namespace std;
 
 enum SPLIT_DIM { X_DIM, Y_DIM, Z_DIM, NONE_DIM };

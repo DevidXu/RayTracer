@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <iomanip>
+#include <math.h>
 #include <cassert>
 
 std::ostream &operator<<(std::ostream& out, const Vector2 v) {

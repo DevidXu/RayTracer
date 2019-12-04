@@ -199,7 +199,7 @@ Vector3 Raster::directLight(shared_ptr<Ray> ray, shared_ptr<Patch> hitPatch, Vec
 		// first: whether it is in shadow?
 		shared_ptr<Ray> ray = make_shared<Ray>(hitPoint, light->getCenter() - hitPoint);
 		ray->march(RAY_MARCH);
-		HitInfo hitInfo(nullptr, INT_MAX * 1.0f);
+		HitInfo hitInfo(nullptr, INT8_MAX * 1.0f);
 		kdTree->intersectWithRay(ray, hitInfo);
 		if (hitInfo.first->getModel()->getName() != light->getName()) continue;
 
@@ -221,7 +221,7 @@ Vector3 Raster::traceRay(shared_ptr<Ray> ray, const shared_ptr<KDTree>& kdTree, 
 	Vector3 radiance;
 
 	while (depth < MAX_DEPTH) {
-		HitInfo hitInfo(nullptr, INT_MAX * 1.0f);
+		HitInfo hitInfo(nullptr, INT8_MAX * 1.0f);
 		kdTree->intersectWithRay(ray, hitInfo);
 		shared_ptr<Patch> hitPatch = hitInfo.first;
 		Vector3 hitPoint = ray->getPosition() + ray->getDirection() * hitInfo.second;
@@ -284,21 +284,21 @@ void Raster::writeToPPM(string fileName, Picture &graph) {
 
 	normalize(graph);
 	const int rows = graph.size(), cols = graph[0].size();
-	
-	FILE *fp = NULL;
-	fopen_s(&fp, (fileName + ".ppm").c_str(), "wb"); /* b - binary mode */
-	INFO("Create and write to file " + fileName + ".ppm");
 
-	(void)fprintf(fp, "P6\n%d %d\n255\n", cols, rows);
+	fstream fs;
+	fs.open((fileName + ".ppm").c_str(), fstream::out | fstream::binary );
+	INFO("Create and write to file " + fileName + ".ppm");
+	fs << "P6" << endl << cols << " " << rows << endl << 255 << endl;
+	
 	for (int i = 0; i < rows; ++i) {
 		for (int j = 0; j < cols; ++j) {
 			static unsigned char color[3];
 			for (int k = 0; k < 3; k++)
 				color[k] = (int)(graph[i][j].value[k] * 255) % 256;
-			fwrite(color, 1, 3, fp);
+			fs << color[0] << color[1] << color[2];
 		}
 	}
 
 	INFO("File has been saved. Please check local workspace");
-	fclose(fp);
+	fs.close();
 }

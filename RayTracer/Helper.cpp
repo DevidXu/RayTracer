@@ -140,7 +140,7 @@ void loadSceneConfig(string sceneConfig) {
 /*
 Model Config Format Specification
 OBJ
-Material 0.0 0.0 0.2
+Material 0.0 0.0 0.2 (emissive specular glass)
 FileName
 TextureName
 CUBE Name
@@ -157,6 +157,19 @@ Material 0.1 0.2 0.2
 ...(1 center)
 ...(Radius)
 ...(1 color)
+
+Example:
+CUBE High
+Material 0.0 0.95 0.0
+-1.4 0.6 -1.2
+-1.7 0.6 0.0
+-0.5 0.6 0.3
+-0.2 0.6 -0.9
+-0.2 -2.0 -0.9
+-0.5 -2.0 0.3
+-1.7 -2.0 0.0
+-1.4 -2.0 -1.2
+1.0 1.0 1.0
 */
 void loadModelConfig(string modelConfig) {
 	// read model information
