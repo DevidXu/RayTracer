@@ -18,3 +18,5 @@ Installed: Visual Studio, Microsoft MPI
 I suggest downloading the whole project and open the sln file in Visual Studio 2017. 
 Make sure you have installed Microsoft MPI and the directory of mpiexec.exe is listed in System Path.
 On windows platform: mpiexec.exe -n 8 RayTracer.exe (feel free to choose number of processes)
+
+![image](https://github.com/DevidXu/RayTracer/blob/master/Slides/S1.jpg)
