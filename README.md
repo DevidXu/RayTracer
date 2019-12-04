@@ -20,3 +20,8 @@ Make sure you have installed Microsoft MPI and the directory of mpiexec.exe is l
 On windows platform: mpiexec.exe -n 8 RayTracer.exe (feel free to choose number of processes)
 
 ![image](https://github.com/DevidXu/RayTracer/blob/master/Slides/S1.jpg)
+![image](https://github.com/DevidXu/RayTracer/blob/master/Slides/S2.jpg)
+![image](https://github.com/DevidXu/RayTracer/blob/master/Slides/S3.jpg)
+![image](https://github.com/DevidXu/RayTracer/blob/master/Slides/S4.jpg)
+![image](https://github.com/DevidXu/RayTracer/blob/master/Slides/S5.jpg)
+![image](https://github.com/DevidXu/RayTracer/blob/master/Slides/S6.jpg)
